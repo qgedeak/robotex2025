@@ -14,6 +14,9 @@ Vonalkövetésről készítettünk egy tanulmányt 2015-ben: [weboldal](http://u
 
 [![ITALY Video](img/italy.jpg)](https://youtu.be/MHesNWMKTPU)
 
+**Kép a robotról:**
+![Robot kép](img/italy.jpg)
+
 | Paraméter      | Leírás                   | Alapérték |
 |----------------|--------------------------|-----------|
 |     |![Lecco ItLUG 2022 - ITLUG Robotics Team - ITALY](https://youtu.be/MHesNWMKTPU) | 500       |
