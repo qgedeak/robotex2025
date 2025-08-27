@@ -1,26 +1,22 @@
-# Vonalkövető Robot Projekt
+# Vonalkövető Projekt
 
-## Cél: 
+## Dokumentálás Célja: 
 - memorandum
 - tanulási lehetőség másoknak
+
 Ez a dokumentáció igyekszig megmutatni és összegyüjti mindazt, ami a 2025-ös Prosuli vonalkövetőversenyével kapcsolatban készült.
 
+## Előzmény:
+A vonalkövetési feladatk a robotversenyek leggyakoribb feladatai. (Fll, WRO, RoboCup, RobotOlimpia, stb..) 
+Vonalkövetésről készítettünk egy tanulmányt 2015-ben: [weboldal](http://users.atw.hu/vonalkovetes)
 
----
+## Inspirációs videók:
 
-## 🔹 Funkciók
-- Fekete vonal követése fehér háttéren  
-- Jobbra-balra kanyarodás érzékelés alapján  
-- Sebesség állítható paraméterként  
-- Egyszerű algoritmus → könnyen bővíthető  
 
----
-
-## 📊 Táblázat a beállításokról
 
 | Paraméter      | Leírás                   | Alapérték |
 |----------------|--------------------------|-----------|
-| `threshold`    | Fényérzékelő küszöbérték | 500       |
+|     |![Lecco ItLUG 2022 - ITLUG Robotics Team - ITALY](https://youtu.be/MHesNWMKTPU) | 500       |
 | `speed`        | Motor sebessége          | 50        |
 | `delay`        | Reakció késleltetés (ms) | 100       |
 
