@@ -12,8 +12,9 @@ Vonalkövetésről készítettünk egy tanulmányt 2015-ben: [weboldal](http://u
 
 ## Inspirációs videók:
 
-[![ITALY Video](img/italy.jpg)](https://youtu.be/MHesNWMKTPU)
+[!<img src="img/italy.jpg" alt="Robot kép" width="400">](https://youtu.be/MHesNWMKTPU)
 
+<img src="img/italy.jpg" alt="Robot kép" width="400">
 **Kép a robotról:**
 ![Robot kép](img/italy.jpg)
 
