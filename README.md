@@ -12,7 +12,7 @@ Vonalkövetésről készítettünk egy tanulmányt 2015-ben: [weboldal](http://u
 
 ## Inspirációs videók:
 
-
+[![ITALY Video](img/italy.jpg)](https://youtu.be/MHesNWMKTPU)
 
 | Paraméter      | Leírás                   | Alapérték |
 |----------------|--------------------------|-----------|
