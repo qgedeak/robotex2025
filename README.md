@@ -10,17 +10,18 @@ Ez a dokumentáció igyekszig megmutatni és összegyüjti mindazt, ami a 2025-�
 A vonalkövetési feladatk a robotversenyek leggyakoribb feladatai. (Fll, WRO, RoboCup, RobotOlimpia, stb..) 
 Vonalkövetésről készítettünk egy tanulmányt 2015-ben: [weboldal](http://users.atw.hu/vonalkovetes)
 
+## Versenyszabályzat a magyar versenyről:
+[szabályok mentett](mds/2025.Line Following Rules.hu.v.04.07..md)
+[szabályok online]([mds/2025.Line Following Rules.hu.v.04.07..md](https://docs.google.com/document/d/1thQl6xXX_qvgtK1BIwJ8JObkCabkKbEllVdfRe9Oe6A/edit?pli=1&tab=t.0#heading=h.xe0xnnmimg7h))
+
 ## Inspirációs videók:
 
 [!<img src="img/italy.jpg" alt="Robot kép" width="400">](https://youtu.be/MHesNWMKTPU)
 
-<img src="img/italy.jpg" alt="Robot kép" width="400">
-**Kép a robotról:**
-![Robot kép](img/italy.jpg)
+
 
 | Paraméter      | Leírás                   | Alapérték |
 |----------------|--------------------------|-----------|
-|     |![Lecco ItLUG 2022 - ITLUG Robotics Team - ITALY](https://youtu.be/MHesNWMKTPU) | 500       |
 | `speed`        | Motor sebessége          | 50        |
 | `delay`        | Reakció késleltetés (ms) | 100       |
 
