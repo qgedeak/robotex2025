@@ -65,7 +65,8 @@ Az inspiráció videójában látható konstrució hardver paraméterei:
 - 3 szenzor elhelyezésének köszönhetően, a szenzorok súlyozott összege pontos és PID vonalkövetést tesz lehetővé. A vonal elvesztését, a szélső szenzoroknak kell detektálniuk.
 - RobotC fejlesztő környezetnek köszönhetően a ciklus idő 2msec alatt. Így a legnagyobb sebesség esetén is a vonalon való áthaladásról több szenzorérték is elérhető a programban.
 
-- **Elért eredmények**
+**Elért eredmények**
 - Finomhangolt PID, nagy sebesség mellet is.
 - Megoldatlan problémakétn ált elő a tesztpályán 90°-os törésében elvesztette a vonalat, mert a szenzor adatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
-[!<img src="img/3_szenzor.jpg" alt="3 szenzor diagram" title="3 szenzor diagram" width="400">]
+- | A diagrammon a sarokra ráfutó robot 3 szenzorja által gyüjtött szenzorértékek vannak diagramban megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobra a máikon balra hagya el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre haja el a vonalat. | ![3 szenzor diagram](img/3_szenzor.jpg) |
+
