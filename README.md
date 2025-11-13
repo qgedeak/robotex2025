@@ -55,10 +55,10 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 ## Robot Kialakítása
 
 Az inspiráció videójában látható konstrució hardver paraméterei:
--EV3 Brick
--Power Functions → Powered Up adapter
--LEGO Power Functions L-Motor (88003)
--3db Color Sensor
+- EV3 Brick
+- Power Functions → Powered Up adapter
+- LEGO Power Functions L-Motor (88003)
+- 3db Color Sensor
 
 ### várt előnyök
 - Az L-motor-nak köszönhetően 380fordulat/perc sebesség.
