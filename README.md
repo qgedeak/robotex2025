@@ -71,6 +71,7 @@ Az inspiráció videójában látható konstrució hardver paraméterei:
   
 | Magyarázat | diagram |
 |----------|-----------|
-| A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak diagramban megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra a máikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad el a vonalat. A szenzorok s1 bal s2 középső, s3 jobb szenzor. Az is látszik, a diagramon, hogy az s2 hamarabb elhagyja a vonalat, mikorben a ásik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van. aztán hirtelen eltünik, mindkét szélső szenzor számára, így nem lehet eldönteni merre tönt el!| ![3 szenzor diagram](img/3_szenzor.jpg) |
+| A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak diagramban megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra a máikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad el a vonalat. A szenzorok s1 bal s2 középső, s3 jobb szenzor. Az is látszik, a diagramon, hogy az s2 hamarabb elhagyja a vonalat, mikorben a ásik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van. aztán hirtelen eltünik, mindkét szélső szenzor számára, így nem lehet eldönteni merre tönt el!| ![<img src="img/3_szenzor.jpg" width="400">
+](img/3_szenzor.jpg) |
 
 
