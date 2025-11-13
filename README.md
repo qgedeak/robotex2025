@@ -51,3 +51,21 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 
 
 [!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtube.com/shorts/WkEWVOLTY2w?feature=share)
+
+## Robot Kialakítása
+
+Az inspiráció videójában látható konstrució hardver paraméterei:
+-EV3 Brick
+-Power Functions → Powered Up adapter
+-LEGO Power Functions L-Motor (88003)
+-3db Color Sensor
+
+### várt előnyök
+- Az L-motor-nak köszönhetően 380fordulat/perc sebesség.
+- 3 szenzor elhelyezésének köszönhetően, a szenzorok súlyozott összege pontos és PID vonalkövetést tesz lehetővé. A vonal elvesztését, a szélső szenzoroknak kell detektálniuk.
+- RobotC fejlesztő környezetnek köszönhetően a ciklus idő 2msec alatt. Így a legnagyobb sebesség esetén is a vonalon való áthaladásról több szenzorérték is elérhető a programban.
+
+- **Elért eredmények**
+- Finomhangolt PID, nagy sebesség mellet is.
+- Megoldatlan problémakétn ált elő a tesztpályán 90°-os törésében elvesztette a vonalat, mert a szenzor adatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
+[!<img src="img/3_szenzor.jpg" alt="3 szenzor diagram" title="3 szenzor diagram" width="400">]
