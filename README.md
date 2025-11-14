@@ -60,7 +60,7 @@ Az inspiráció videójában látható konstrució hardver paraméterei:
 - LEGO Power Functions L-Motor (88003)
 - 3db Color Sensor
 
-### várt előnyök
+### Várt előnyök
 - Az L-motor-nak köszönhetően 380fordulat/perc sebesség.
 - 3 szenzor elhelyezésének köszönhetően, a szenzorok súlyozott összege pontos és PID vonalkövetést tesz lehetővé. A vonal elvesztését, a szélső szenzoroknak kell detektálniuk.
 - RobotC fejlesztő környezetnek köszönhetően a ciklus idő 2msec alatt. Így a legnagyobb sebesség esetén is a vonalon való áthaladásról több szenzorérték is elérhető a programban.
@@ -69,10 +69,13 @@ Az inspiráció videójában látható konstrució hardver paraméterei:
 - Finomhangolt PID, nagy sebesség mellet is.
 - Megoldatlan problémakétn ált elő a tesztpályán 90°-os törésében elvesztette a vonalat, mert a szenzor adatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
   
-| Magyarázat | diagram |
+| Magyarázat | Diagram |
 |----------|-----------|
-| A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak diagramban megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra a máikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad el a vonalat. | A szenzorok s1 bal s2 középső, s3 jobb szenzor. Az is látszik, a diagramon, hogy az s2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van. aztán hirtelen eltünik, mindkét szélső szenzor számára, így nem lehet eldönteni merre tönt el!!![3 szenzor diagram](img/3_szenzor.jpg)
+| A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak diagramban megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra a máikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad el a vonalat. | A szenzorok s1 bal s2 középső, s3 jobb szenzor. Az is látszik, a diagramon, hogy az s2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van. aztán hirtelen eltünik, mindkét szélső szenzor számára, így nem lehet eldönteni merre tönt el!!![3 szenzor diagram](img/3_szenzor.jpg)|
 
+### 3 vagy 4 szenzor?
 
+|----------|-----------|
+|A három szenzor esetén, sok a vonal környezetében az informásió, pontos az error meghatározása! Az error jelenti azt a távolságot mely a vonal középvonalától a szenzorcsoport közepének tart!| 4 Szenzor esetén a képen látható elhelyezésben, nagy tterületről jön információ, viszont nem olyan precíz az error mint 3 szenor esetén! ![3_4 szenzor diagram](img/3_4szenzor.jpg)|
 
 
