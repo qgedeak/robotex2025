@@ -86,5 +86,5 @@ Ha egymás mellet helyezzük el a szenzookat, akkor egyszerre **egy** vagy rész
 - ha csak a középsők közül az egyik, akkor kis korrekcióra van szükség
 - ha a szélsők valamelyike akkor nagy korrekcióra van szükség
 - ha egyikse, akkor elvsztette a vonalat! 
-[3_4szenzor diagram](img/4_szenzor_error.jpg)
+![3_4szenzor diagram](img/4_szenzor_error.jpg)
 
