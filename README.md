@@ -76,6 +76,6 @@ Az inspiráció videójában látható konstrució hardver paraméterei:
 ### 3 vagy 4 szenzor?
 
 |----------|-----------|
-|A három szenzor esetén, sok a vonal környezetében az informásió, pontos az error meghatározása! Az error jelenti azt a távolságot mely a vonal középvonalától a szenzorcsoport közepének tart!| 4 Szenzor esetén a képen látható elhelyezésben, nagy tterületről jön információ, viszont nem olyan precíz az error mint 3 szenor esetén! ![3_4 szenzor diagram](img/3_4szenzor.jpg)|
+|A három szenzor esetén, sok a vonal környezetében az informásió, pontos az error meghatározása! Az error jelenti azt a távolságot mely a vonal középvonalától a szenzorcsoport közepének tart!| 4 Szenzor esetén a képen látható elhelyezésben, nagy tterületről jön információ, viszont nem olyan precíz az error mint 3 szenor esetén! ![3_4szenzor diagram](img/3_4senzor.jpg)|
 
 
