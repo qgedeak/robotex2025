@@ -69,14 +69,22 @@ Az inspiráció videójában látható konstrució hardver paraméterei:
 - Finomhangolt PID, nagy sebesség mellet is.
 - Megoldatlan problémakétn ált elő a tesztpályán 90°-os törésében elvesztette a vonalat, mert a szenzor adatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
   
-
+| leírás | diagram | 
 |----------|-----------|
 | A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak diagramban megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra a máikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad el a vonalat. | A szenzorok s1 bal s2 középső, s3 jobb szenzor. Az is látszik, a diagramon, hogy az s2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van. aztán hirtelen eltünik, mindkét szélső szenzor számára, így nem lehet eldönteni merre tönt el!!![3 szenzor diagram](img/3_szenzor.jpg)|
 
 ### 3 vagy 4 szenzor?
 
-
+| leírás | diagram | 
 |----------|-----------|
 |A három szenzor esetén, sok a vonal környezetében az információ, pontos az error meghatározása! **error=-S1+S3/(S1+S2+S3)** Az error jelenti azt a távolságot mely a vonal középvonalától a szenzorcsoport közepének tart!  4 Szenzor esetén a képen látható elhelyezésben, nagy területről jön információ, viszont nem olyan precíz az error mint 3 szenor esetén! | ![3_4szenzor diagram](img/3_4sensor.jpg)|
 
+### 4 senzorral hogyan határozuk meg a vonaltol való távolságot?
+
+Ha egymás mellet helyezzük el a szenzookat, akkor egyszerre **egy** vagy részben **két** szenzor látja egyszerre a vonalat. 7
+- Ha a két középső látja részben akkor van pont jó helyen
+- ha csak a középsők közül az egyik, akkor kis korrekcióra van szükség
+- ha a szélsők valamelyike akkor nagy korrekcióra van szükség
+- ha egyikse, akkor elvsztette a vonalat! 
+[3_4szenzor diagram](img/4_szenzor_error.jpg)
 
