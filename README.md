@@ -81,10 +81,10 @@ Az inspiráció videójában látható konstrució hardver paraméterei:
 
 ### 4 senzorral hogyan határozuk meg a vonaltol való távolságot?
 
-Ha egymás mellet helyezzük el a szenzookat, akkor egyszerre **egy** vagy részben **két** szenzor látja egyszerre a vonalat. 7
-- Ha a két középső látja részben akkor van pont jó helyen
+Ha egymás mellet helyezzük el a szenzookat, akkor egyszerre **egy** vagy részben **két** szenzor látja egyszerre a vonalat.
+- Ha a két középső látja részben, akkor van pont jó helyen
 - ha csak a középsők közül az egyik, akkor kis korrekcióra van szükség
-- ha a szélsők valamelyike akkor nagy korrekcióra van szükség
-- ha egyikse, akkor elvsztette a vonalat! 
+- ha a szélsők valamelyike, akkor nagy korrekcióra van szükség
+- ha egyikse, akkor elvesztette a vonalat! 
 ![3_4szenzor diagram](img/4_szenzor_error.jpg)
 
