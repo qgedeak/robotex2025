@@ -79,7 +79,7 @@ Az inspiráció videójában látható konstrukció hardver paraméterei:
 
 | Leírás | Diagram | 
 |----------|-----------|
-| A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása!   **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepének tart. 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
+| A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása!   **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepéig tart. 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
 
 ### 4 szenzorral hogyan határozzuk meg a vonaltól való távolságot?
 
