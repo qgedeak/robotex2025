@@ -1,30 +1,31 @@
 # Vonalkövető Projekt
 
-## Dokumentálás Célja: 
-- memorandum
-- tanulási lehetőség másoknak
+## Dokumentálás célja
+- Memorandum
+- Tanulási lehetőség másoknak
 
-Ez a dokumentáció igyekszig megmutatni és összegyüjti mindazt, ami a 2025-ös Prosuli vonalkövetőversenyével kapcsolatban készült.
+Ez a dokumentáció igyekszik megmutatni és összegyűjti mindazt, ami a 2025-ös Prosuli vonalkövető versennyel kapcsolatban készült.
 
-## Előzmény:
-A vonalkövetési feladatk a robotversenyek leggyakoribb feladatai. (Fll, WRO, RoboCup, RobotOlimpia, stb..) 
-Vonalkövetésről készítettünk egy tanulmányt 2015-ben. prezi formában még elérhető: [prezi](https://prezi.com/3eiayjo-uein/lego-robot-programozas/)
+## Előzmény
+A vonalkövetési feladatok a robotversenyek leggyakoribb feladatai (FLL, WRO, RoboCup, RobotOlimpia, stb.).  
+Vonalkövetésről készítettünk egy tanulmányt 2015-ben, Prezi formában még elérhető: [prezi](https://prezi.com/3eiayjo-uein/lego-robot-programozas/)
 
-## Versenyszabályzat a magyar versenyről:
--[szabályok mentett](mds/2025.Line Following Rules.hu.v.04.07..md)
--[szabályok mentett](mds/2025.Line%20Following%20Rules.hu.v.04.07..md)
--[szabályok online](https://docs.google.com/document/d/1thQl6xXX_qvgtK1BIwJ8JObkCabkKbEllVdfRe9Oe6A/edit?pli=1&tab=t.0#heading=h.xe0xnnmimg7h)
+## Versenyszabályzat a magyar versenyről
+- [Szabályok mentett](mds/2025.Line Following Rules.hu.v.04.07..md)
+- [Szabályok mentett](mds/2025.Line%20Following%20Rules.hu.v.04.07..md)
+- [Szabályok online](https://docs.google.com/document/d/1thQl6xXX_qvgtK1BIwJ8JObkCabkKbEllVdfRe9Oe6A/edit?pli=1&tab=t.0#heading=h.xe0xnnmimg7h)
 
-## Versenyszabályok a nemzetközi versenyről:
--[szabályok online](https://robotex.international/wp-content/uploads/2024/07/Line-following-2024-ENG.pdf)
+## Versenyszabályok a nemzetközi versenyről
+- [Szabályok online](https://robotex.international/wp-content/uploads/2024/07/Line-following-2024-ENG.pdf)
 
-## Inspirációs videók:
+## Inspirációs videók
 [!<img src="img/italy.jpg" alt="Robot kép" width="400">](https://youtu.be/MHesNWMKTPU)
 
-## RobotC fejlesztőkörnyezetről:
+## RobotC fejlesztőkörnyezetről
 A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál, ami gyors és precíz működést tesz lehetővé a grafikus (EV3-G) vagy Python megoldásokhoz képest.
 
 ---
+
 ### Előnyök
 
 - **Valós idejű hardver-hozzáférés**  
@@ -37,7 +38,7 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
   A változók és szenzorértékek futás közben nyomon követhetők.
 
 - **Teljes hardverhozzáférés**  
-  Minden motor és szenzor közvetlenül vezérelhető, nincs “elrejtett réteg”.
+  Minden motor és szenzor közvetlenül vezérelhető, nincs „elrejtett réteg”.
 
 ---
 
@@ -49,42 +50,42 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 | **Python (főiskolai verziók)** | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
 | **RobotC** | Gyors, valós idejű, precíz | Több kódolást igényel, kevésbé vizuális |
 
-
 [!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtube.com/shorts/WkEWVOLTY2w?feature=share)
 
-## Robot Kialakítása
+## Robot kialakítása
 
-Az inspiráció videójában látható konstrució hardver paraméterei:
+Az inspiráció videójában látható konstrukció hardver paraméterei:
 - EV3 Brick
 - Power Functions → Powered Up adapter
 - LEGO Power Functions L-Motor (88003)
-- 3db Color Sensor
+- 3 db Color Sensor
 
 ### Várt előnyök
-- Az L-motor-nak köszönhetően 380fordulat/perc sebesség.
-- 3 szenzor elhelyezésének köszönhetően, a szenzorok súlyozott összege pontos és PID vonalkövetést tesz lehetővé. A vonal elvesztését, a szélső szenzoroknak kell detektálniuk.
-- RobotC fejlesztő környezetnek köszönhetően a ciklus idő 2msec alatt. Így a legnagyobb sebesség esetén is a vonalon való áthaladásról több szenzorérték is elérhető a programban.
+- Az L-motornak köszönhetően 380 fordulat/perc sebesség.
+- 3 szenzor elhelyezésének köszönhetően a szenzorok súlyozott összege pontos és PID vonalkövetést tesz lehetővé. A vonal elvesztését a szélső szenzoroknak kell detektálniuk.
+- RobotC fejlesztőkörnyezetnek köszönhetően a ciklusidő 2 ms alatt van. Így a legnagyobb sebesség esetén is a vonalon való áthaladásról több szenzorérték is elérhető a programban.
 
 **Elért eredmények**
-- Finomhangolt PID, nagy sebesség mellet is.
-- Megoldatlan problémakétn ált elő a tesztpályán 90°-os törésében elvesztette a vonalat, mert a szenzor adatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
-  
-| leírás | diagram | 
+- Finomhangolt PID, nagy sebesség mellett is.
+- Megoldatlan probléma: a tesztpályán 90°-os törésnél a robot elvesztette a vonalat, mert a szenzoradatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
+
+| Leírás | Diagram | 
 |----------|-----------|
-| A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak diagramban megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra a máikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad el a vonalat. | A szenzorok s1 bal s2 középső, s3 jobb szenzor. Az is látszik, a diagramon, hogy az s2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van. aztán hirtelen eltünik, mindkét szélső szenzor számára, így nem lehet eldönteni merre tönt el!!![3 szenzor diagram](img/3_szenzor.jpg)|
+| A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra, a másikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad a vonalat. | A szenzorok: S1 bal, S2 középső, S3 jobb szenzor. Az is látszik a diagramon, hogy az S2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van, majd hirtelen eltűnik mindkét szélső szenzor számára, így nem lehet eldönteni, merre tűnt el! [3 szenzor diagram](img/3_szenzor.jpg) |
 
 ### 3 vagy 4 szenzor?
 
-| leírás | diagram | 
+| Leírás | Diagram | 
 |----------|-----------|
-|A három szenzor esetén, sok a vonal környezetében az információ, pontos az error meghatározása! **error=-S1+S3/(S1+S2+S3)** Az error jelenti azt a távolságot mely a vonal középvonalától a szenzorcsoport közepének tart!  4 Szenzor esetén a képen látható elhelyezésben, nagy területről jön információ, viszont nem olyan precíz az error mint 3 szenor esetén! | ![3_4szenzor diagram](img/3_4sensor.jpg)|
+| A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása! **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepének tart. 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
 
-### 4 senzorral hogyan határozuk meg a vonaltol való távolságot?
+### 4 szenzorral hogyan határozzuk meg a vonaltól való távolságot?
 
-Ha egymás mellet helyezzük el a szenzookat, akkor egyszerre **egy** vagy részben **két** szenzor látja egyszerre a vonalat.
-- Ha a két középső látja részben, akkor van pont jó helyen
-- ha csak a középsők közül az egyik, akkor kis korrekcióra van szükség
-- ha a szélsők valamelyike, akkor nagy korrekcióra van szükség
-- ha egyikse, akkor elvesztette a vonalat! 
+Ha egymás mellett helyezzük el a szenzorokat, akkor egyszerre **egy** vagy részben **két** szenzor látja a vonalat.  
+- Ha a két középső látja részben, akkor jó helyen van.  
+- Ha csak a középsők közül az egyik, akkor kis korrekcióra van szükség.  
+- Ha a szélsők valamelyike, akkor nagy korrekcióra van szükség.  
+- Ha egyik sem, akkor elvesztette a vonalat!  
+
 ![3_4szenzor diagram](img/4_szenzor_error.jpg)
 
