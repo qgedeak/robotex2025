@@ -50,6 +50,8 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 | **Python (főiskolai verziók)** | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
 | **RobotC** | Gyors, valós idejű, precíz | Több kódolást igényel, kevésbé vizuális |
 
+### A Következő képen a Magyar nemzeti döntőben nyertes robotunk és a képre kattintva a videó a versenyszereplésről:
+A programról: robotC-ben készült. A két középső szenzorral kétágú vonalkövés, a két szélső a vonal elhagyását detektálja.
 [!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtube.com/shorts/WkEWVOLTY2w?feature=share)
 
 ## Robot kialakítása
