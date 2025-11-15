@@ -124,4 +124,121 @@ typedef struct {
     byte S1, S2, S3, S4;          // normalizált értékek
     byte S1MAX, S2MAX, S3MAX, S4MAX;   // kalibrációs maximumok
 } Sensors;
+```
+A readSensors() függvény:
+-	arányosítja: (SensorValue * 100) / MAX
+-	0–100-ra korlátozza az eredményt.
 
+## 2️⃣ Hibaszámítás (Error Computation)
+
+### Mit kell érteni?
+A robotnak tudnia kell:  
+- merre van a vonal,  
+- milyen erős az eltérés,  
+- milyen esetben tűnt el teljesen a vonal.  
+
+A hibaszámítás a PID szabályozó bemenete.
+
+### Miért fontos?
+A line-follower stabilitását és gyorsaságát döntően ez határozza meg.
+
+### Hogyan valósul meg nálunk?
+A `compute_error()` függvény:  
+- Felismeri különböző eseményeket:
+  - kereszteződés,  
+  - szélső szenzor jelenség,  
+  - vonal elvesztése,  
+  - irány megjegyzése.  
+- Hiba számítása súlyozott bal–jobb eltéréssel:
+```c
+return (int)(-s->S1*3 - s->S2*1 + s->S3*1 + s->S4*3) / 3;```
+
+-	állapotfüggő LED visszajelzést is ad. (kis processzoridejű visszajelzés)
+A legutolsó irányt az enum tárolja:
+```c
+enum Direction { MIDDLE = 0, RIGHT = 1, LEFT = -1 };```
+
+## 3️⃣ Klasszikus PID szabályozás
+
+### Mit kell érteni?
+A PID három komponensből áll:  
+- **P** arányos (hiba nagysága),  
+- **I** integráló (hosszú távú eltérés korrekciója),  
+- **D** deriváló (hiba változási sebessége).  
+
+### Miért fontos?
+A robot így:  
+- rezgésmentesen,  
+- gyorsan,  
+- kis túllendüléssel képes követni a vonalat.  
+
+### Hogyan valósul meg nálunk?
+A `PID` struktúra:
+
+```c
+typedef struct {
+    float Kp, Ki, Kd;   // PID paraméterek
+    float I, D;         // aktuális I és D komponensek
+    int error, prevError;  
+    Direction lastDir;  // utolsó irány
+} PID;```
+
+A computePID() függvény:
+- Számolja az I és D tagokat,
+- Előző hibát tárolja,
+- A kimenetet korlátozza motorvezérléshez:
+```c
+if(output > 50) output = 50;
+if(output < -50) output = -50;
+```
+## 4️⃣ Sebességkezelés és adaptív PID
+
+### Mit kell érteni?
+A robot motorjai nem azonnal érik el a kívánt sebességet, a gyorsulás és lassulás különböző dinamikát mutat.  
+- **Exponenciális mozgóátlag (EMA)** segít a sebesség becslésében,  
+- **Adaptív PID** lehetővé teszi, hogy a PID paraméterek a robot sebességéhez és a pálya típusához igazodjanak.  
+
+### Miért fontos?
+- Stabil vonalkövetés gyorsan változó pályán,  
+- Kisebb rezgés és túllendülés,  
+- Motorok védelme túl gyors változások esetén.  
+
+### Hogyan valósul meg nálunk?
+A `SpeedHandler` struktúra tárolja a sebességbecslést és az adaptív PID paramétereket:
+
+```c
+typedef struct {
+    float estimatedSpeedA;
+    float estimatedSpeedD;
+    float alpha;               // EMA súly
+    AdaptivePID adaptive;      // adaptív PID paraméterek
+} SpeedHandler;
+```
+A sebességbecslés (EMA) a főciklusban történik:
+```c
+float alphaA = (motorA_power > sh->estimatedSpeedA) ? alpha_accel : alpha_decel;
+float alphaD = (motorD_power > sh->estimatedSpeedD) ? alpha_accel : alpha_decel;
+
+// Sebesség becslés
+sh->estimatedSpeedA += (motorA_power - sh->estimatedSpeedA) * alphaA;
+sh->estimatedSpeedD += (motorD_power - sh->estimatedSpeedD) * alphaD;
+
+// Átlagsebesség
+float avgSpeed = (sh->estimatedSpeedA + sh->estimatedSpeedD) * 0.5;
+
+```
+A PID paraméterek adaptív módon változnak:
+```c
+if(avgSpeed < sh->adaptive.speedThreshold) {
+    pid->Kp = sh->adaptive.Kp_slow;
+    pid->Ki = sh->adaptive.Ki_slow;
+    pid->Kd = sh->adaptive.Kd_slow;
+} else {
+    pid->Kp = sh->adaptive.Kp_fast;
+    pid->Ki = sh->adaptive.Ki_fast;
+    pid->Kd = sh->adaptive.Kd_fast;
+}
+```
+- alpha_accel lassú gyorsuláshoz,
+- alpha_decel gyors lassuláshoz,
+- speedThreshold határozza meg, mikor vált a PID paraméter.
