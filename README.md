@@ -44,7 +44,7 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 
 ### ❌ Hátrányok 
 - **Fizetős**
-- **Nem fejleszti már**  
+- **Nem fejlesztik már**  
 ---
 
 ### Összehasonlítás más megoldásokkal
