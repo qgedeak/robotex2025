@@ -170,7 +170,7 @@ return (int)(-s->S1*3 - s->S2*1 + s->S3*1 + s->S4*3) / 3;
 ```
 
 -	állapotfüggő LED visszajelzést is ad. (kis processzoridejű visszajelzés)
-A legutolsó irányt az enum tárolja:
+- A legutolsó irányt az enum tárolja:
 ```c
 enum Direction { MIDDLE = 0, RIGHT = 1, LEFT = -1 };
 ```
