@@ -192,6 +192,15 @@ A `computePID()` függvény:
 - A kimenetet korlátozza motorvezérléshez:
 
 ```c
+pid->D = pid->error - pid->prevError;
+
+float output =
+        pid->Kp * pid->error +
+        pid->Ki * pid->I +
+        pid->Kd * pid->D;
+
+pid->prevError = pid->error;
+
 if(output > 50) output = 50;
 if(output < -50) output = -50;
 ```
