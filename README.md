@@ -121,9 +121,8 @@ Mindegyik pont tartalmazza:
 
 ### Mi a probléma lényege?
 A nyers fényérzékelő-értékek különböznek:
-- eltérő szenzorok,
-- eltérő felületek,
-- különböző felszerelési távolságok miatt.  
+- eltérő szenzorok (fizikai),
+- a pálya eltérő megvilágítása 
 
 A robotnak egységesített 0–100 skálán kell dolgoznia.
 
