@@ -151,12 +151,14 @@ A `compute_error()` függvény:
   - irány megjegyzése.  
 - Hiba számítása súlyozott bal–jobb eltéréssel:
 ```c
-return (int)(-s->S1*3 - s->S2*1 + s->S3*1 + s->S4*3) / 3;```
+return (int)(-s->S1*3 - s->S2*1 + s->S3*1 + s->S4*3) / 3;
+```
 
 -	állapotfüggő LED visszajelzést is ad. (kis processzoridejű visszajelzés)
 A legutolsó irányt az enum tárolja:
 ```c
-enum Direction { MIDDLE = 0, RIGHT = 1, LEFT = -1 };```
+enum Direction { MIDDLE = 0, RIGHT = 1, LEFT = -1 };
+```
 
 ## 3️⃣ Klasszikus PID szabályozás
 
@@ -181,16 +183,19 @@ typedef struct {
     float I, D;         // aktuális I és D komponensek
     int error, prevError;  
     Direction lastDir;  // utolsó irány
-} PID;```
+} PID;
+```
 
-A computePID() függvény:
+A `computePID()` függvény:
 - Számolja az I és D tagokat,
 - Előző hibát tárolja,
 - A kimenetet korlátozza motorvezérléshez:
+
 ```c
 if(output > 50) output = 50;
 if(output < -50) output = -50;
 ```
+
 ## 4️⃣ Sebességkezelés és adaptív PID
 
 ### Mit kell érteni?
@@ -239,6 +244,6 @@ if(avgSpeed < sh->adaptive.speedThreshold) {
     pid->Kd = sh->adaptive.Kd_fast;
 }
 ```
-- alpha_accel lassú gyorsuláshoz,
-- alpha_decel gyors lassuláshoz,
-- speedThreshold határozza meg, mikor vált a PID paraméter.
+- `alpha_accel` lassú gyorsuláshoz,
+- `alpha_decel` gyors lassuláshoz,
+- `speedThreshold` határozza meg, mikor vált a PID paraméter.
