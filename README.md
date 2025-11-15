@@ -91,3 +91,68 @@ Ha egymás mellett helyezzük el a szenzorokat, akkor egyszerre **egy** vagy ré
 
 ![3_4szenzor diagram](img/4_szenzor_error.jpg)
 
+# Line Follower Robot
+
+Egy professzionális vonalkövető robot szoftver megoldás intelligens szenzor feldolgozással és adaptív PID vezérléssel.
+
+## 📋 Tartalomjegyzék
+- [Áttekintés](#áttekintés)
+- [Főbb jellemzők](#főbb-jellemzők)
+- [Hardver követelmények](#hardver-követelmények)
+- [Szenzor elrendezés](#szenzor-elrendezés)
+- [Telepítés](#telepítés)
+- [Technikai dokumentáció](#technikai-dokumentáció)
+
+## 🎯 Áttekintés
+
+Ez a projekt egy fejlett vonalkövető robot szoftver implementációját tartalmazza, amely intelligens szenzor feldolgozással, adaptív PID szabályozással és speciális helyzetkezeléssel rendelkezik.
+
+## ✨ Főbb jellemzők
+
+- 🎯 **Speciális szenzor feldolgozás** - Normalizált és linearizált szenzor értékek
+- 📈 **Adaptív PID vezérlés** - Dinamikus paraméter váltás sebesség alapján
+- 🚀 **EMA sebesség becslés** - Sima sebesség számítás exponenciális mozgóátlaggal
+- 🧠 **Okos helyzet kezelés** - Kereszteződés érzékelés, vonalvesztés kezelés
+- ⚡ **Valós idejű teljesítmény** - Konzisztens 1-3ms ciklusidők
+
+## 💻 Hardver követelmények
+
+- 4x Analóg vonal szenzor
+- 2x DC motor motorvezérlővel
+- Mikrokontroller (Arduino kompatibilis)
+- Tápegység
+
+## 📡 Szenzor elrendezés
+
+### 4 szenzorral hogyan határozzuk meg a vonaltól való távolságot?
+
+A szenzorok egymás mellett helyezkednek el, és a következő logika alapján működnek:
+
+- ✅ **Két középső szenzor érzékeli** → Robot pontosan a vonalon van
+- ✅ **Csak egy középső szenzor érzékeli** → Kis korrekció szükséges
+- ✅ **Szélső szenzor érzékel** → Nagy korrekció szükséges
+- ❌ **Egyik szenzor sem érzékel** → Vonal elvesztése
+
+## 🔧 Telepítés
+
+1. **Kód feltöltése** a mikrokontrollerre
+2. **Szenzorok kalibrálása** - automatikus maximum érték felvétel
+3. **PID paraméterek beállítása** a pálya viszonyokhoz
+
+## 🎮 Használat
+
+A robot automatikusan elindul és követi a vonalat. Speciális helyzetekben:
+
+- **Kereszteződés**: Egyenesen halad tovább
+- **Vonalvesztés**: Visszatér az utolsó ismert irányba
+- **Éles kanyar**: Sima forduló adaptív PID-vel
+
+## 🔬 Technikai dokumentáció
+
+### Szenzor normalizálás
+```c
+struct Sensors {
+    byte S1, S2, S3, S4;
+    byte S1MAX, S2MAX, S3MAX, S4MAX;
+};
+
