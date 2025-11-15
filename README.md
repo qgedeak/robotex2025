@@ -126,7 +126,7 @@ typedef struct {
 } Sensors;
 ```
 A readSensors() függvény:
--	arányosítja: (SensorValue * 100) / MAX
+-	arányosítja: `(SensorValue * 100) / MAX`
 -	0–100-ra korlátozza az eredményt.
 
 ## 2️⃣ Hibaszámítás (Error Computation)
@@ -247,3 +247,153 @@ if(avgSpeed < sh->adaptive.speedThreshold) {
 - `alpha_accel` lassú gyorsuláshoz,
 - `alpha_decel` gyors lassuláshoz,
 - `speedThreshold` határozza meg, mikor vált a PID paraméter.
+
+## 5️⃣ Főprogram és cikluskezelés
+
+### Mit kell érteni?
+A robot működése ciklikus: minden ciklusban olvassa a szenzorokat, számítja a hibát, frissíti a PID-et és vezérli a motorokat.  
+- Fontos a ciklusidő 2 ms alatt tartása a stabil vonalkövetéshez. (kerülni kell  nagy processzoridejű kódokat)  
+- A hibák, sebesség és ciklusok nyomon követése segít a finomhangolásban.
+
+### Miért fontos?
+- Stabil és gyors vonalkövetés,  
+- Hibák és rezgések csökkentése,  
+- Tesztelés és debug egyszerűsítése.
+
+### Hogyan valósul meg nálunk?
+A `Debug` struktúra tárolja az idő és ciklusadatokat:
+
+```c
+typedef struct {
+    long startTime;  // program indítási ideje
+    int ciklus;      // futott ciklusok száma
+} Debug;
+```
+A főciklus felépítése:
+```c
+while(nSysTime - dbg.startTime < 10000) {  // 10 másodperc
+    readSensors(&s);                        // szenzorok olvasása
+    pid.error = compute_error(&s, &pid);    // hibaszámítás
+    handleSpeedAndPID(&sh, &pid, motor[motorA], motor[motorD]);//sebesség becslés, adaptív PID paraméterek állítása
+    int correction = computePID(&pid);      // PID számítás
+    motor[motorA] = 50 - correction;        // motorvezérlés
+    motor[motorD] = 50 + correction;
+    dbg.ciklus++;                            // ciklusszámláló
+    wait1Msec(1);                            // rövid várakozás
+}
+```
+Ha kilépett a főciklusból akkor lehet:
+- adatokat kiírni a kijelzőre.
+- mentett adatokat fájlba írni.
+
+## 6️⃣ LED visszajelzés és állapotfigyelés
+
+### Mit kell érteni?
+A robot vizuális visszajelzést ad a működési állapotáról a LED segítségével:  
+- Piros LED → vonal elvesztése vagy kritikus helyzet  
+- Zöld LED → szélső szenzor jelez, kisebb korrekció  
+- Kioltott LED → normál működés, vonal középen  
+
+Ez segít a fejlesztés és a finomhangolás során azonnal érzékelni a robot aktuális állapotát.
+
+### Miért fontos?
+- Gyors vizuális visszajelzés a hibák és kritikus események azonosításához  
+- Tesztelés közben látható a robot reakciója a vonal jelére  
+- Debugolás egyszerűsítése
+
+### Hogyan valósul meg nálunk?
+A LED vezérlést a `compute_error()` függvény kezeli:
+
+```c
+if(s->S1 > 90 && s->S2 > 90 && s->S3 > 90 && s->S4 > 90) {
+    setLEDColor(ledRed);   // Vonal elveszett
+} else if ((s->S1 > 20 && s->S2 > 90 && s->S3 > 90 && s->S4 > 90) ||
+           (s->S1 > 90 && s->S2 > 90 && s->S3 > 90 && s->S4 > 20)) {
+    setLEDColor(ledGreen); // Szélső szenzor jel
+} else {
+    setLEDColor(ledOff);   // Normál működés
+}
+```
+- A LED állapot azonnal tükrözi az aktuális szenzorhelyzetet.
+- Segíti a PID finomhangolását és a motorvezérlés helyességének ellenőrzését.
+
+## 7️⃣ Sebességbecslés és adaptív PID
+
+### Mit kell érteni?
+- A robot motorjai gyorsulnak és lassulnak a parancsok hatására, de a tényleges sebesség lassabban követi a beállított értéket.
+- Az Exponential Moving Average (EMA) technikát használjuk a sebesség becslésére.
+- Két alfa érték van:  
+  - Lassú gyorsulás (alpha_accel)  
+  - Gyors lassulás (alpha_decel)
+
+### Miért fontos?
+- A robot stabilabb követést biztosít nagyobb sebességnél is.
+- Finomítja a PID szabályozó reakcióját, mert a motor valós állapotát figyelembe veszi.
+- Minimalizálja a túllendülést és rezgést a motorváltozásoknál.
+
+### Hogyan valósul meg nálunk?
+A `handleSpeedAndPID()` függvény végzi a számítást:
+
+```c
+float alphaA = (motorA_power > sh->estimatedSpeedA) ? alpha_accel : alpha_decel;
+float alphaD = (motorD_power > sh->estimatedSpeedD) ? alpha_accel : alpha_decel;
+
+// Sebesség becslés EMA-val
+sh->estimatedSpeedA += (motorA_power - sh->estimatedSpeedA) * alphaA;
+sh->estimatedSpeedD += (motorD_power - sh->estimatedSpeedD) * alphaD;
+
+// Átlagos sebesség
+float avgSpeed = (sh->estimatedSpeedA + sh->estimatedSpeedD) * 0.5;
+
+// Adaptív PID paraméterválasztás
+if(avgSpeed < sh->adaptive.speedThreshold) {
+    pid->Kp = sh->adaptive.Kp_slow;
+    pid->Ki = sh->adaptive.Ki_slow;
+    pid->Kd = sh->adaptive.Kd_slow;
+} else {
+    pid->Kp = sh->adaptive.Kp_fast;
+    pid->Ki = sh->adaptive.Ki_fast;
+    pid->Kd = sh->adaptive.Kd_fast;
+}
+```
+
+- estimatedSpeedA és estimatedSpeedD tárolja a motorok aktuális becsült sebességét.
+- alpha_accel lassítja a gyorsulást, alpha_decel gyorsítja a lassulást.
+- Az adaptív PID paraméterek automatikusan változnak a robot sebességéhez illeszkedve.
+
+ ## 8️⃣ Fő ciklus és statisztika
+
+### Mit kell érteni?
+- A fő ciklus a robot „szíve”, ahol minden iterációban:
+  1. Beolvassuk a szenzorok értékeit
+  2. Számítjuk a hibát a vonalhoz képest
+  3. PID számítást végzünk
+  4. Motorokra alkalmazzuk a korrekciót
+  5. Becslést végzünk a motorsebességről
+- A ciklusidő nagyon rövid (~2 ms), hogy a robot gyorsan reagáljon a vonal változásaira.
+
+### Miért fontos?
+- A stabil és gyors vonalkövetés ezen ciklus hatékonyságán múlik.
+- A hibaszámítás, PID és motorvezérlés szoros integrációja biztosítja a rezgésmentes mozgást.
+- Statisztikák (átlagos ciklusidő, futott ciklusok, eltelt idő) segítik a finomhangolást és hibakeresést.
+
+### Hogyan valósul meg nálunk?
+- A `task main()` tartalmazza a végtelen ciklust, melyet 10 másodpercig futtatunk.
+- Debug struktúrában tároljuk a futott ciklusok számát és a startidőt.
+- A motorvezérlés a PID kimenetét használja, sebességbecsléssel kiegészítve.
+- A végén kiírjuk a statisztikát a kijelzőre:
+
+```c
+long elapsed = nSysTime - dbg.startTime;   
+float avgCycle = (float)elapsed / dbg.ciklus;
+
+eraseDisplay();
+displayBigTextLine(3, "Ciklusok: %d", dbg.ciklus);
+displayBigTextLine(5, "Eltelt: %d ms", elapsed);
+displayBigTextLine(7, "Atlag: %.2f ms", avgCycle);
+displayBigTextLine(1, "%d %d %d %d", s.S1,s.S2,s.S3,s.S4);
+ ```
+- Ez lehetővé teszi a ciklusidő optimalizálását és a PID finomhangolását.
+- Rövid várakozás (wait1Msec(1)) biztosítja a stabil időzítést és CPU-kímélést! Tényleg fontos!
+
+  
