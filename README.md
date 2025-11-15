@@ -6,20 +6,21 @@
 
 Ez a dokumentáció igyekszik megmutatni és összegyűjti mindazt, ami a 2025-ös Prosuli vonalkövető versennyel kapcsolatban készült.
 
-## ♻️ Előzmény  
+## ♻️Előzmény  
 A vonalkövetési feladatok a robotversenyek leggyakoribb feladatai (FLL, WRO, RoboCup, RobotOlimpia, stb.).  
 Vonalkövetésről készítettünk egy tanulmányt 2015-ben, Prezi formában még elérhető: [prezi](https://prezi.com/3eiayjo-uein/lego-robot-programozas/)
 
-## 📝 Versenyszabályzat a magyar versenyről
+## 📝Versenyszabályzat a magyar versenyről
 - [Szabályok mentett](mds/2025.Line Following Rules.hu.v.04.07..md)
 - [Szabályok mentett](mds/2025.Line%20Following%20Rules.hu.v.04.07..md)
 - [Szabályok online](https://docs.google.com/document/d/1thQl6xXX_qvgtK1BIwJ8JObkCabkKbEllVdfRe9Oe6A/edit?pli=1&tab=t.0#heading=h.xe0xnnmimg7h)
 
-## 📝 Versenyszabályok a nemzetközi versenyről
+## 📝Versenyszabályok a nemzetközi versenyről
 - [Szabályok online](https://robotex.international/wp-content/uploads/2024/07/Line-following-2024-ENG.pdf)
 
 ## 🎬 Inspirációs videók
 youtubon az `EV3 follower kulcsszavakra több profi robotot mutató videó elérhető:
+
 [!<img src="img/italy.jpg" alt="Robot kép" width="400">](https://youtu.be/MHesNWMKTPU)
 
 ## RobotC fejlesztőkörnyezetről
@@ -50,8 +51,8 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 
 | Megoldás | Előnyök | Hátrányok |
 |----------|---------|-----------|
-| *EV3-G (grafikus)* | Egyszerű, vizuális blokkok | Korlátozott hardver-hozzáférés |
-| *Python (főiskolai verziók)* | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
+| **EV3-G (grafikus)** | Egyszerű, vizuális blokkok | Korlátozott hardver-hozzáférés |
+| **Python (főiskolai verziók)** | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
 | **RobotC** | Gyors, valós idejű, precíz | Több kódolást igényel, kevésbé vizuális |
 
 ### 🎬 A Következő képen a Magyar nemzeti döntőben nyertes robotunk és a képre kattintva a videó a versenyszereplésről:
@@ -73,7 +74,7 @@ Az inspiráció videójában látható konstrukció hardver paraméterei:
 - 3 szenzor elhelyezésének köszönhetően a szenzorok súlyozott összege pontos és PID vonalkövetést tesz lehetővé. A vonal elvesztését a szélső szenzoroknak kell detektálniuk.
 - RobotC fejlesztőkörnyezetnek köszönhetően a ciklusidő 2 ms alatt van. Így a legnagyobb sebesség esetén is a vonalon való áthaladásról több szenzorérték is elérhető a programban.
 
-** 📈 Elért eredmények**
+**📈 Elért eredmények**
 - Finomhangolt PID, nagy sebesség mellett is.
 - Megoldatlan probléma: a tesztpályán 90°-os törésnél a robot elvesztette a vonalat, mert a szenzoradatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
 
@@ -104,7 +105,7 @@ Ha egymás mellett helyezzük el a szenzorokat, akkor egyszerre **egy** vagy ré
 
 ---
 
-# 📝 Line Follower Robot – Modulok és Alapelvek Dokumentáció
+# 📝Line Follower Robot – Modulok és Alapelvek Dokumentáció
 
 Az alábbi pontok a line-follower robot működéséhez szükséges főbb technikai területeket, algoritmusokat és szoftvermintákat foglalják össze.  
 Mindegyik pont tartalmazza:  
@@ -383,7 +384,7 @@ if(avgSpeed < sh->adaptive.speedThreshold) {
 - alpha_accel lassítja a gyorsulást, alpha_decel gyorsítja a lassulást.
 - Az adaptív PID paraméterek automatikusan változnak a robot sebességéhez illeszkedve.
 
- ## 8️⃣ Fő ciklus és statisztika
+ ## 8️⃣ Statisztika
 
 ### Mi a probléma lényege?
 - A fő ciklus a robot „szíve”, ahol minden iterációban:
@@ -393,6 +394,10 @@ if(avgSpeed < sh->adaptive.speedThreshold) {
   - Motorokra alkalmazzuk a korrekciót
   - Becslést végzünk a motorsebességről
 - A ciklusidő nagyon rövid (~2 ms), hogy a robot gyorsan reagáljon a vonal változásaira.
+- ⚡ Amíg a főciklusban vagyunk:
+  - nem jeleníthetünk meg semmit
+  - nem adhat ki hangot
+  - nem kommunikálhat a PC-vel!
 
 ### Miért fontos?
 - A stabil és gyors vonalkövetés ezen ciklus hatékonyságán múlik.
