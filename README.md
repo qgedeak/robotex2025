@@ -1,4 +1,4 @@
-# Vonalkövető Projekt
+# Vonalkövető Projekt 2024 nov. - 2025 dec.
 
 ## Dokumentálás célja
 - Memorandum
@@ -6,19 +6,20 @@
 
 Ez a dokumentáció igyekszik megmutatni és összegyűjti mindazt, ami a 2025-ös Prosuli vonalkövető versennyel kapcsolatban készült.
 
-## Előzmény
+## ♻️ Előzmény  
 A vonalkövetési feladatok a robotversenyek leggyakoribb feladatai (FLL, WRO, RoboCup, RobotOlimpia, stb.).  
 Vonalkövetésről készítettünk egy tanulmányt 2015-ben, Prezi formában még elérhető: [prezi](https://prezi.com/3eiayjo-uein/lego-robot-programozas/)
 
-## Versenyszabályzat a magyar versenyről
+## 📝 Versenyszabályzat a magyar versenyről
 - [Szabályok mentett](mds/2025.Line Following Rules.hu.v.04.07..md)
 - [Szabályok mentett](mds/2025.Line%20Following%20Rules.hu.v.04.07..md)
 - [Szabályok online](https://docs.google.com/document/d/1thQl6xXX_qvgtK1BIwJ8JObkCabkKbEllVdfRe9Oe6A/edit?pli=1&tab=t.0#heading=h.xe0xnnmimg7h)
 
-## Versenyszabályok a nemzetközi versenyről
+## 📝 Versenyszabályok a nemzetközi versenyről
 - [Szabályok online](https://robotex.international/wp-content/uploads/2024/07/Line-following-2024-ENG.pdf)
 
-## Inspirációs videók
+## 🎬 Inspirációs videók
+youtubon az `EV3 follower kulcsszavakra több profi robotot mutató videó elérhető:
 [!<img src="img/italy.jpg" alt="Robot kép" width="400">](https://youtu.be/MHesNWMKTPU)
 
 ## RobotC fejlesztőkörnyezetről
@@ -26,7 +27,7 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 
 ---
 
-### Előnyök
+### ✔️ Előnyök
 
 - **Valós idejű hardver-hozzáférés**  
   Motorok és szenzorok állapota azonnal olvasható és írható.
@@ -40,48 +41,53 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 - **Teljes hardverhozzáférés**  
   Minden motor és szenzor közvetlenül vezérelhető, nincs „elrejtett réteg”.
 
+### ❌ Hátrányok 
+- **Fizetős**
+- **Nem fejleszti már**  
 ---
 
 ### Összehasonlítás más megoldásokkal
 
 | Megoldás | Előnyök | Hátrányok |
 |----------|---------|-----------|
-| **EV3-G (grafikus)** | Egyszerű, vizuális blokkok | Korlátozott hardver-hozzáférés |
-| **Python (főiskolai verziók)** | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
+| *EV3-G (grafikus)* | Egyszerű, vizuális blokkok | Korlátozott hardver-hozzáférés |
+| *Python (főiskolai verziók)* | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
 | **RobotC** | Gyors, valós idejű, precíz | Több kódolást igényel, kevésbé vizuális |
 
-### A Következő képen a Magyar nemzeti döntőben nyertes robotunk és a képre kattintva a videó a versenyszereplésről:
+### 🎬 A Következő képen a Magyar nemzeti döntőben nyertes robotunk és a képre kattintva a videó a versenyszereplésről:
 A programról: robotC-ben készült. A két középső szenzorral kétágú vonalkövés, a két szélső a vonal elhagyását detektálja.
 [!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtube.com/shorts/WkEWVOLTY2w?feature=share)
 
-## Robot kialakítása
+---
+
+## 🧪 Robot kialakítása kísérleti fázis
 
 Az inspiráció videójában látható konstrukció hardver paraméterei:
-- EV3 Brick
+- **EV3** Brick
 - Power Functions → Powered Up adapter
-- LEGO Power Functions L-Motor (88003)
-- 3 db Color Sensor
+- LEGO Power Functions **L-Motor** (88003)
+- 3 db **Color Sensor**
 
-### Várt előnyök
-- Az L-motornak köszönhetően 380 fordulat/perc sebesség.
+### 💡 Várt előnyök
+- Az L-motornak köszönhetően 380 fordulat/perc sebesség. (88mm-es kerék, 1.75 m/s maximális elméleti sebesség)
 - 3 szenzor elhelyezésének köszönhetően a szenzorok súlyozott összege pontos és PID vonalkövetést tesz lehetővé. A vonal elvesztését a szélső szenzoroknak kell detektálniuk.
 - RobotC fejlesztőkörnyezetnek köszönhetően a ciklusidő 2 ms alatt van. Így a legnagyobb sebesség esetén is a vonalon való áthaladásról több szenzorérték is elérhető a programban.
 
-**Elért eredmények**
+** 📈 Elért eredmények**
 - Finomhangolt PID, nagy sebesség mellett is.
 - Megoldatlan probléma: a tesztpályán 90°-os törésnél a robot elvesztette a vonalat, mert a szenzoradatokból eldönthetetlen volt, hogy melyik oldalra hagyja el a vonalat. Ennek magyarázatát a következő ábra mutatja:
 
-| Leírás | Diagram | 
+| Vonalvesztés | Diagramon | 
 |----------|-----------|
 | A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra, a másikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad a vonalat. | A szenzorok: S1 bal, S2 középső, S3 jobb szenzor. Az is látszik a diagramon, hogy az S2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van, majd hirtelen eltűnik mindkét szélső szenzor számára, így nem lehet eldönteni, merre tűnt el! ![3 szenzor diagram](img/3_szenzor.jpg) |
 
 ### 3 vagy 4 szenzor?
 
-| Leírás | Diagram | 
+| tesztelt szenzor poziciók | 3 vagy 4 | 
 |----------|-----------|
-| A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása!   **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepéig tart. 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
+| A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása!   **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepéig tart. 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz (más- más távolságohoz is ugyanaz az error tartozik) az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
 
-### 4 szenzorral hogyan határozzuk meg a vonaltól való távolságot?
+### 🔴🔴🔴🔴 4 szenzorral hogyan határozzuk meg a vonaltól való távolságot?
 
 Ha egymás mellett helyezzük el a szenzorokat, akkor egyszerre **egy** vagy részben **két** szenzor látja a vonalat.  
 - Ha a két középső látja részben, akkor jó helyen van.  
@@ -91,11 +97,18 @@ Ha egymás mellett helyezzük el a szenzorokat, akkor egyszerre **egy** vagy ré
 
 ![3_4szenzor diagram](img/4_szenzor_error.jpg)
 
-# Line Follower Robot – Modulok és Alapelvek Dokumentáció
+- Az ábrán látható, ahogy a robot elhalad a vonallal merőlegesen.
+- Egymás után haladnak el a szenzorok a vonal fölött.
+- Ezen adatokból a súlyozott képelt segítségével számoljuk a hiba értékét. 
+- Ez a számított error a PID alapja!
+
+---
+
+# 📝 Line Follower Robot – Modulok és Alapelvek Dokumentáció
 
 Az alábbi pontok a line-follower robot működéséhez szükséges főbb technikai területeket, algoritmusokat és szoftvermintákat foglalják össze.  
 Mindegyik pont tartalmazza:  
-- **Mit kell érteni?** (elmélet)  
+- **Mi a probléma lényege?** (elmélet)  
 - **Miért fontos?** (rendszer szintű szerep)  
 - **Hogyan valósul meg nálunk?** (konkrét megvalósítás a kódban)  
 
@@ -103,7 +116,7 @@ Mindegyik pont tartalmazza:
 
 ## 1️⃣ Szenzor-normalizálás és linearizálás
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 A nyers fényérzékelő-értékek különböznek:
 - eltérő szenzorok,
 - eltérő felületek,
@@ -131,7 +144,7 @@ A readSensors() függvény:
 
 ## 2️⃣ Hibaszámítás (Error Computation)
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 A robotnak tudnia kell:  
 - merre van a vonal,  
 - milyen erős az eltérés,  
@@ -162,7 +175,7 @@ enum Direction { MIDDLE = 0, RIGHT = 1, LEFT = -1 };
 
 ## 3️⃣ Klasszikus PID szabályozás
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 A PID három komponensből áll:  
 - **P** arányos (hiba nagysága),  
 - **I** integráló (hosszú távú eltérés korrekciója),  
@@ -207,7 +220,7 @@ if(output < -50) output = -50;
 
 ## 4️⃣ Sebességkezelés és adaptív PID
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 A robot motorjai nem azonnal érik el a kívánt sebességet, a gyorsulás és lassulás különböző dinamikát mutat.  
 - **Exponenciális mozgóátlag (EMA)** segít a sebesség becslésében,  
 - **Adaptív PID** lehetővé teszi, hogy a PID paraméterek a robot sebességéhez és a pálya típusához igazodjanak.  
@@ -259,7 +272,7 @@ if(avgSpeed < sh->adaptive.speedThreshold) {
 
 ## 5️⃣ Főprogram és cikluskezelés
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 A robot működése ciklikus: minden ciklusban olvassa a szenzorokat, számítja a hibát, frissíti a PID-et és vezérli a motorokat.  
 - Fontos a ciklusidő 2 ms alatt tartása a stabil vonalkövetéshez. (kerülni kell  nagy processzoridejű kódokat)  
 - A hibák, sebesség és ciklusok nyomon követése segít a finomhangolásban.
@@ -297,7 +310,7 @@ Ha kilépett a főciklusból akkor lehet:
 
 ## 6️⃣ LED visszajelzés és állapotfigyelés
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 A robot vizuális visszajelzést ad a működési állapotáról a LED segítségével:  
 - Piros LED → vonal elvesztése vagy kritikus helyzet  
 - Zöld LED → szélső szenzor jelez, kisebb korrekció  
@@ -328,7 +341,7 @@ if(s->S1 > 90 && s->S2 > 90 && s->S3 > 90 && s->S4 > 90) {
 
 ## 7️⃣ Sebességbecslés és adaptív PID
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 - A robot motorjai gyorsulnak és lassulnak a parancsok hatására, de a tényleges sebesség lassabban követi a beállított értéket.
 - Az Exponential Moving Average (EMA) technikát használjuk a sebesség becslésére.
 - Két alfa érték van:  
@@ -372,13 +385,13 @@ if(avgSpeed < sh->adaptive.speedThreshold) {
 
  ## 8️⃣ Fő ciklus és statisztika
 
-### Mit kell érteni?
+### Mi a probléma lényege?
 - A fő ciklus a robot „szíve”, ahol minden iterációban:
-  1. Beolvassuk a szenzorok értékeit
-  2. Számítjuk a hibát a vonalhoz képest
-  3. PID számítást végzünk
-  4. Motorokra alkalmazzuk a korrekciót
-  5. Becslést végzünk a motorsebességről
+  - Beolvassuk a szenzorok értékeit
+  - Számítjuk a hibát a vonalhoz képest
+  - PID számítást végzünk
+  - Motorokra alkalmazzuk a korrekciót
+  - Becslést végzünk a motorsebességről
 - A ciklusidő nagyon rövid (~2 ms), hogy a robot gyorsan reagáljon a vonal változásaira.
 
 ### Miért fontos?
