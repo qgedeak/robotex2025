@@ -81,13 +81,19 @@ Az inspiráció videójában látható konstrukció hardver paraméterei:
 
 | Vonalvesztés | Diagramon | 
 |----------|-----------|
-| A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak megjelenítve. Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra, a másikon balra hagyja el a vonalat. Így nem találtunk megoldást, hogy meghatározzuk merre halad a vonalat. | A szenzorok: S1 bal, S2 középső, S3 jobb szenzor. Az is látszik a diagramon, hogy az S2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van, majd hirtelen eltűnik mindkét szélső szenzor számára, így nem lehet eldönteni, merre tűnt el! ![3 szenzor diagram](img/3_szenzor.jpg) |
+| 
+- A diagramon a sarokra ráfutó robot 3 szenzorja által gyűjtött szenzorértékek vannak megjelenítve.
+- Tisztán látszik, hogy nagyon hasonló a két minta, mégis az egyiken jobbra, a másikon balra hagyja el a vonalat.
+- Így nem találtunk megoldást, hogy meghatározzuk merre halad a vonalat. | A szenzorok: S1 bal, S2 középső, S3 jobb szenzor. Az is látszik a diagramon, hogy az S2 hamarabb elhagyja a vonalat, miközben a másik kettő érzékeli a vonalat, de nem csak érintőlegesen, hanem rajta van, majd hirtelen eltűnik mindkét szélső szenzor számára, így nem lehet eldönteni, merre tűnt el! ![3 szenzor diagram](img/3_szenzor.jpg) |
 
 ### 3 vagy 4 szenzor?
 
 | tesztelt szenzor poziciók | 3 vagy 4 Color szenzor| 
 |----------|-----------|
-| A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása!   **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepéig tart. 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz (más- más távolságohoz is ugyanaz az error tartozik) az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
+| 
+- A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása! 
+- **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepéig tart.
+- 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz (más- más távolságohoz is ugyanaz az error tartozik) az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
 
 ### 🔴🔴🔴🔴 4 szenzorral hogyan határozzuk meg a vonaltól való távolságot?
 
