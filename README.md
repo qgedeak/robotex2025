@@ -52,7 +52,7 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 | Megoldás | Előnyök | Hátrányok |
 |----------|---------|-----------|
 | **EV3-G (grafikus)** | Egyszerű, vizuális blokkok | Korlátozott hardver-hozzáférés |
-| **Python (főiskolai verziók)** | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
+| **Python** | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
 | **RobotC** | Gyors, valós idejű, precíz | Több kódolást igényel, kevésbé vizuális |
 
 ### 🎬 A Következő képen a Magyar nemzeti döntőben nyertes robotunk, és a képre kattintva a videó a versenyszereplésről:
