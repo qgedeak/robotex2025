@@ -19,7 +19,7 @@ Vonalkövetésről készítettünk egy tanulmányt 2015-ben, Prezi formában mé
 - [Szabályok online](https://robotex.international/wp-content/uploads/2024/07/Line-following-2024-ENG.pdf)
 
 ## 🎬 Inspirációs videók
-youtubon az `EV3 follower kulcsszavakra több profi robotot mutató videó elérhető:
+youtube-on az `EV3 follower` kulcsszavakra több profi robotot mutató videó elérhető:
 
 [!<img src="img/italy.jpg" alt="Robot kép" width="400">](https://youtu.be/MHesNWMKTPU)
 
@@ -55,8 +55,9 @@ A RobotC a LEGO EV3 programozásában **közvetlen hardvervezérlést** kínál,
 | **Python (főiskolai verziók)** | Könnyen olvasható, magas szintű | Lassabb reakcióidő, kevésbé precíz |
 | **RobotC** | Gyors, valós idejű, precíz | Több kódolást igényel, kevésbé vizuális |
 
-### 🎬 A Következő képen a Magyar nemzeti döntőben nyertes robotunk és a képre kattintva a videó a versenyszereplésről:
+### 🎬 A Következő képen a Magyar nemzeti döntőben nyertes robotunk, és a képre kattintva a videó a versenyszereplésről:
 A programról: robotC-ben készült. A két középső szenzorral kétágú vonalkövés, a két szélső a vonal elhagyását detektálja.
+
 [!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtube.com/shorts/WkEWVOLTY2w?feature=share)
 
 ---
@@ -84,7 +85,7 @@ Az inspiráció videójában látható konstrukció hardver paraméterei:
 
 ### 3 vagy 4 szenzor?
 
-| tesztelt szenzor poziciók | 3 vagy 4 | 
+| tesztelt szenzor poziciók | 3 vagy 4 Color szenzor| 
 |----------|-----------|
 | A három szenzor esetén sok információ érkezik a vonal környezetéből, pontos az error meghatározása!   **error = -S1 + S3 / (S1 + S2 + S3)**. Az error jelenti azt a távolságot, amely a vonal középvonalától a szenzorcsoport közepéig tart. 4 szenzor esetén a képen látható elhelyezésből nagy területről jön információ, viszont nem olyan precíz (más- más távolságohoz is ugyanaz az error tartozik) az error, mint 3 szenzor esetén. | ![3_4szenzor diagram](img/3_4sensor.jpg) |
 
