@@ -515,7 +515,7 @@ Jellemzői:
 - Több ilyen konstrukciójú robot is volt. (Olasz, Koreai, Litván) Mind a vonal elhagyással küzködtek. Néha végigment, így lett 11sec körüli idejük.
   
 ### Ötletek egy új robothoz
-- Lehetne vonalkövetés PID -et megvalósítani két szenzorral is, a másik kettő csak a vonal elhagyés vagy tanításhoz lenne használva.
-- Akár könyedebb súlypontelosztás is lehetne.
+- Lehetne vonalkövetést, PID-et megvalósítani két szenzorral is, a másik kettő csak a vonal elhagyás vagy tanításhoz lenne használva.
+- Akár könnyedebb súlypontelosztás is lehetne.
 - Ha a győztes koncepcoót valósítjuk meg, akkor lehetne betanulni a kanyarok irányát is.
   
