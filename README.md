@@ -310,6 +310,20 @@ Ha kilépett a főciklusból akkor lehet:
 - adatokat kiírni a kijelzőre.
 - mentett adatokat fájlba írni.
 
+A következő főciklusban integrálva lettek további működések is:
+
+-Az állapotváltozások kezelése azért van külön függvényben, mert nemcsak az aktuális állapotot, hanem az állapotátmeneteket is detektálja. Például érdekes, ha ERROR állapotból LINE vagy CORR állapotba kerül 300 ms után, ami csak akkor fordul elő, ha elvesztette a vonalat, kompenzált, és visszatalált.
+
+-Mikor ERROR állapot van, akkor visszahúzással tér vissza a vonalhoz — a nagy pályán szükség volt rá! Így a korrekciót kétféleképpen használjuk fel. A 36 - correction érték tapasztalati úton meghatározott az adott pályához.
+
+-Minden motorértéket egyfajta súlyozott átlagolással állítunk be, hogy milliszekundumonként ne kerüljön teljesen ellentétes parancs a motorba. (Rángatás alakult ki, ezt hivatott csökkenteni.)
+
+-A detectBrakePoint() akkor regisztrál fékpontot, amikor ERROR állapotba kerül, de a pontot követően 600 ms-ig nem enged új fékpontot, és a detektált pontot fájlba menti.
+
+-A checkPlaybackBrake() függvény az előző futás alatt lementett fékpontokat megelőző 350 ms-ban teszi lehetővé fékpont elhelyezését.
+
+-Ugyanebben a függvényben valósul meg az is, hogy nemcsak a tanult pontokon fékez, hanem kézzel beállított pontokon és azok környezetében is lehetőség van fékpont elhelyezésére (pályaspecifikus lehetőség).
+
 ## 6️⃣ LED visszajelzés és állapotfigyelés
 
 ### Mi a probléma lényege?
