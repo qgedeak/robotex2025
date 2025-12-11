@@ -310,6 +310,71 @@ Ha kilépett a főciklusból akkor lehet:
 - adatokat kiírni a kijelzőre.
 - mentett adatokat fájlba írni.
 
+Továbbfejlesztett főprogram:
+```c
+// A főciklus 17 másodpercig fut (17000 ms)
+while (nSysTime - tm.startTime < 17000) {
+
+    readSensors1234();           // Négy vonalkövető szenzor beolvasása
+    pid.error = compute_error(); // Hiba kiszámítása a szenzorok alapján (eltérés a vonaltól)
+    int correction = computePID();// PID számítás, amely megadja a kormányzási korrekció mértékét
+
+    setTransition();             // Állapotgép frissítése (LINE, ERROR stb. váltások)
+
+    float speed = 1.6;	        // Normál sebességszorzó (1.6 → feszültség/skálázás)
+
+    // Ha hibaállapotban vagyunk, lassabb/óvatosabb értékekkel korrigálunk
+    if (state == ERROR){
+        motor[motorA] = (36 - correction) * 2;
+        motor[motorD] = (36 + correction) * 2;
+
+    } else {
+        // Normál állapotban dinamikus sebesség + PID korrekció
+        motor[motorA] = (50 - correction) * speed;
+        motor[motorD] = (50 + correction) * speed;
+    }
+
+    // Motor kimenetek kisimítása (low-pass szűrés)
+    // Csökkenti a hirtelen változásokat, rángatásokat
+    motor[motorA] = (motor[motorA] * 2 + lastMotorA) / 3;
+    motor[motorD] = (motor[motorD] * 2 + lastMotorD) / 3;
+    lastMotorA = motor[motorA];
+    lastMotorD = motor[motorD];
+
+    detectBrakePoint();      // Speciális fékezési pontok felismerése
+    checkPlaybackBrake();    // A lejátszás alapján szükséges-e fékezni
+    updateCycleTime();       // Ciklusidő mérés/frissítés
+
+    // Minden 100. ciklusban lassító fékezés
+    if (dbg_ciklus % 100 == 0)
+        doBrakeforSlow(1);
+
+    // Ha a robot vonalon van és minden 10. ciklusban → rövid késleltetés stabilizálásra
+    if (state == LINE && dbg_ciklus % 10 == 0) {
+        wait1Msec(2);
+    } else {
+        wait1Msec(1);        // Normál ciklusidő
+    }
+}
+
+// Főciklus vége → motorok leállítása
+motor[motorA] = motor[motorD] = 0;
+```
+A következő főciklusban további működések is integrálva lettek:
+
+-Az állapotváltozások kezelése külön függvényben történik, mert nemcsak az aktuális állapotot, hanem az állapotátmeneteket is detektálja. Például érdekes esemény, ha az ERROR állapotból LINE vagy CORR állapotba kerül 300 ms után. Ez csak akkor fordul elő, ha a robot elveszítette a vonalat, kompenzált, majd visszatalált.
+
+-ERROR állapotban a robot visszahúzó manőverrel tér vissza a vonalhoz, ami a nagy pályán különösen szükségessé vált. Így a korrekciót kétféleképpen használjuk fel. A 36 − correction érték az adott pályához tapasztalati úton meghatározott konstans.
+
+-Minden motorértéket súlyozott átlagolással állítunk be, hogy milliszekundumonként ne kerüljenek egymásnak teljesen ellentmondó parancsok a motorokra. Ez a módszer a rángatás csökkentésére szolgál.
+
+-A detectBrakePoint() függvény ERROR állapotba kerüléskor fékpontot regisztrál, de a pontot követően 600 ms-ig nem enged új fékpontot. A detektált fékpontokat fájlba menti.
+
+-A checkPlaybackBrake() függvény az előző futás alatt elmentett fékpontok alapján működik, és a korábbi fékpontok előtt 350 ms-sal fékezési lehetőséget biztosít.
+
+-Ugyanebben a függvényben valósul meg az is, hogy a robot nemcsak a tanult pontokon fékez, hanem kézzel beállított, pályaspecifikus fékpontokon és azok környezetében is lehetőség van fékpont elhelyezésére.
+
+
 ## 6️⃣ LED visszajelzés és állapotfigyelés
 
 ### Mi a probléma lényege?
