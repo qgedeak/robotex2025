@@ -493,19 +493,23 @@ displayBigTextLine(1, "%d %d %d %d", s.S1,s.S2,s.S3,s.S4);
 ### Verseny napja (2025 dec.5):
 A helyszínen 4 darab egyforma pálya várt minket, melyet egyszerre 9:00 kor fedték fel. 1:45 perc ált rendelkezésre , hogy a pályához igazítsuk a programot és a robotot. 
 1. program: Szakaszos fékezés miatt lassabb, de pontosabb: 14sec
-   [!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtu.be/0TiA_2KJxJ0)
-3. https://youtu.be/0TiA_2KJxJ0
-4. program: Nincs szakaszos fékezés, tanulás, korábbi fékpontok visszajátszása, manuálisan a hurok előtti szakasz belassítása 13.3 sec
+[!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtu.be/0TiA_2KJxJ0)
+
+2. program: Nincs szakaszos fékezés, tanulás, korábbi fékpontok visszajátszása, manuálisan a hurok előtti szakasz belassítása 13.3 sec
 3.-7 program: Különbőző gyorsítások, csökkentet fékpontok, nem tudtak hiba nélkül futni.
     
 ### A Győztes konstrukció:
-   [!<img src="img/olasz.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtu.be/BQq2-tNXDl0)
+
+[!<img src="img/olasz.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtu.be/BQq2-tNXDl0)
+   
 Jellemzői:
-- 10.2sec a legjobb ideje.
+- 10.15 sec a legjobb ideje.
 - Könnyű robot
 - Könnyű ceruzaelem
 - NXT szenzor
 - L-Motor
+- Könnyű vékony kábelek 
 - Letakart szenzor
 - Látható volt hogy a tesztek során, vonalat ugyanúgy elhagyja mint azt tapasztaltuk a 3szenzoros kísérletekben.
-- Több ilyen konstrukciójú robot is volt. (Olasz, Koreai, Litván) Mind a vonal elhagyással küzködtek. Néha végigment, így lett 11sec körüli idejük
+- Több ilyen konstrukciójú robot is volt. (Olasz, Koreai, Litván) Mind a vonal elhagyással küzködtek. Néha végigment, így lett 11sec körüli idejük.
+  
