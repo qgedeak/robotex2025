@@ -496,8 +496,9 @@ A helyszínen 4 darab egyforma pálya várt minket, melyet egyszerre 9:00 kor fe
 [!<img src="img/alulrol.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtu.be/0TiA_2KJxJ0)
 
 2. program: Nincs szakaszos fékezés, tanulás, korábbi fékpontok visszajátszása, manuálisan a hurok előtti szakasz belassítása 13.3 sec
-3.-7 program: Különbőző gyorsítások, csökkentet fékpontok, nem tudtak hiba nélkül futni.
-    
+3.  program: Különbőző gyorsítások, csökkentet fékpontok, nem tudtak hiba nélkül futni.
+[program ](src/MAIN.c)
+[program ](src/DEBUG_PID.c) 
 ### A Győztes konstrukció:
 
 [!<img src="img/olasz.jpg" alt="Robot" title="go to youtube video" width="400">](https://youtu.be/BQq2-tNXDl0)
