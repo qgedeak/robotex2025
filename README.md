@@ -362,17 +362,17 @@ motor[motorA] = motor[motorD] = 0;
 ```
 A következő főciklusban további működések is integrálva lettek:
 
--Az állapotváltozások kezelése külön függvényben történik, mert nemcsak az aktuális állapotot, hanem az állapotátmeneteket is detektálja. Például érdekes esemény, ha az ERROR állapotból LINE vagy CORR állapotba kerül 300 ms után. Ez csak akkor fordul elő, ha a robot elveszítette a vonalat, kompenzált, majd visszatalált.
+- Az állapotváltozások kezelése külön függvényben történik, mert nemcsak az aktuális állapotot, hanem az állapotátmeneteket is detektálja. Például érdekes esemény, ha az ERROR állapotból LINE vagy CORR állapotba kerül 300 ms után. Ez csak akkor fordul elő, ha a robot elveszítette a vonalat, kompenzált, majd visszatalált.
 
--ERROR állapotban a robot visszahúzó manőverrel tér vissza a vonalhoz, ami a nagy pályán különösen szükségessé vált. Így a korrekciót kétféleképpen használjuk fel. A 36 − correction érték az adott pályához tapasztalati úton meghatározott konstans.
+- ERROR állapotban a robot visszahúzó manőverrel tér vissza a vonalhoz, ami a nagy pályán különösen szükségessé vált. Így a korrekciót kétféleképpen használjuk fel. A 36 − correction érték az adott pályához tapasztalati úton meghatározott konstans.
 
--Minden motorértéket súlyozott átlagolással állítunk be, hogy milliszekundumonként ne kerüljenek egymásnak teljesen ellentmondó parancsok a motorokra. Ez a módszer a rángatás csökkentésére szolgál.
+- Minden motorértéket súlyozott átlagolással állítunk be, hogy milliszekundumonként ne kerüljenek egymásnak teljesen ellentmondó parancsok a motorokra. Ez a módszer a rángatás csökkentésére szolgál.
 
--A detectBrakePoint() függvény ERROR állapotba kerüléskor fékpontot regisztrál, de a pontot követően 600 ms-ig nem enged új fékpontot. A detektált fékpontokat fájlba menti.
+- A detectBrakePoint() függvény ERROR állapotba kerüléskor fékpontot regisztrál, de a pontot követően 600 ms-ig nem enged új fékpontot. A detektált fékpontokat fájlba menti.
 
--A checkPlaybackBrake() függvény az előző futás alatt elmentett fékpontok alapján működik, és a korábbi fékpontok előtt 350 ms-sal fékezési lehetőséget biztosít.
+- A checkPlaybackBrake() függvény az előző futás alatt elmentett fékpontok alapján működik, és a korábbi fékpontok előtt 350 ms-sal fékezési lehetőséget biztosít.
 
--Ugyanebben a függvényben valósul meg az is, hogy a robot nemcsak a tanult pontokon fékez, hanem kézzel beállított, pályaspecifikus fékpontokon és azok környezetében is lehetőség van fékpont elhelyezésére.
+- Ugyanebben a függvényben valósul meg az is, hogy a robot nemcsak a tanult pontokon fékez, hanem kézzel beállított, pályaspecifikus fékpontokon és azok környezetében is lehetőség van fékpont elhelyezésére.
 
 
 ## 6️⃣ LED visszajelzés és állapotfigyelés
