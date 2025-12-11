@@ -1,4 +1,4 @@
-# Vonalkövető Projekt 2024 nov. - 2025 dec.
+# Vonalkövető Projekt 2024 nov. - 2025 dec. 6
 
 ## Dokumentálás célja
 - Memorandum
